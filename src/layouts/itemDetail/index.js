@@ -110,7 +110,7 @@ function ItemDetail() {
                     >
                       <MDBox>
                         <MDTypography variant="overline">
-                          채팅 0 · 관심 {item.wishCount ? item.wishCount : 0} · 조회{" "}
+                          신청 0 · 관심 {item.wishCount ? item.wishCount : 0} · 조회{" "}
                           {item.viewCount}
                         </MDTypography>
                       </MDBox>
