@@ -7,7 +7,9 @@ import { useEffect, useState } from "react";
 import axiosInstance from "../../apis/axios";
 import { useNavigate, useParams } from "react-router-dom";
 import MDTypography from "../../components/MDTypography";
-import { ImageList, ImageListItem } from "@mui/material";
+import { CardContent, ImageList, ImageListItem } from "@mui/material";
+import Divider from "@mui/material/Divider";
+import MDButton from "../../components/MDButton";
 
 function ItemDetail() {
   const { itemId } = useParams();
@@ -40,7 +42,7 @@ function ItemDetail() {
   const handleItemApply = () => {
     axiosInstance.post("/api/history", { itemId: itemId }).then((r) => {
       alert("신청되었습니다.");
-      navigate("/items");
+      window.location.reload();
     });
   };
 
@@ -60,26 +62,114 @@ function ItemDetail() {
   return (
     <DashboardLayout>
       <DashboardNavbar />
-
-      <MDBox mt={3} mb={3}>
-        <Grid container spacing={3} justifyContent="center">
-          <Grid item xs={12} lg={8}>
+      <MDBox mt={2} mb={3}>
+        <MDBox mb={1}>
+          <Grid container spacing={2}>
+            {item &&
+              item.images.map((image, index) => (
+                <Grid item key={index} xs={12} sm={9} lg={4}>
+                  <img
+                    src={image}
+                    alt="image"
+                    loading="lazy"
+                    width="100%"
+                    height="300px"
+                    style={{ borderRadius: "8px" }}
+                  />
+                </Grid>
+              ))}
+          </Grid>
+        </MDBox>
+        <Grid container spacing={3} mb={2} justifyContent="center">
+          <Grid item xs={12} sm={12}>
             <Card>
               <MDBox p={2}>
-                <MDTypography variant="h5">{item.title}</MDTypography>
-                <MDBox mt={2}>
-                  <Grid container spacing={2}>
-                    {item &&
-                      item.images.map((image, index) => (
-                        <Grid item key={index}>
-                          <img
-                            srcSet={`${image}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
-                            src={`${image}?w=164&h=164&fit=crop&auto=format`}
-                            alt="image"
-                            loading="lazy"
-                          />
-                        </Grid>
-                      ))}
+                <MDBox p={3}>
+                  <Grid container spacing={1}>
+                    <Grid item xs={12} sm={7}>
+                      <MDBox mb={2}>
+                        <MDTypography variant="h4">{item.title}</MDTypography>
+                      </MDBox>
+                      <MDBox mb={8}>
+                        <MDTypography variant="h6" opacity="60%">
+                          {item.category} · {item.createdTime}
+                        </MDTypography>
+                      </MDBox>
+                      <MDBox mb={2}>
+                        <MDTypography variant="h6">{item.description}</MDTypography>
+                      </MDBox>
+                    </Grid>
+                    <Grid sm={2}></Grid>
+                    <Grid
+                      item
+                      xs={12}
+                      sm={3}
+                      display="flex"
+                      flexDirection="column"
+                      justifyContent="flex-end"
+                    >
+                      <MDBox>
+                        <MDTypography variant="overline">
+                          채팅 0 · 관심 {item.wishCount ? item.wishCount : 0} · 조회{" "}
+                          {item.viewCount}
+                        </MDTypography>
+                      </MDBox>
+                      {item.isOwner ? (
+                        <>
+                          <MDBox mb={1}>
+                            <MDButton
+                              variant="outlined"
+                              color="info"
+                              fullWidth
+                              onClick={() => navigate(`/updateItem/${item.id}`)}
+                            >
+                              <MDTypography variant="h6" color="info">
+                                나눔정보 수정
+                              </MDTypography>
+                            </MDButton>
+                          </MDBox>
+                          <MDBox>
+                            <MDButton
+                              variant="outlined"
+                              color="error"
+                              fullWidth
+                              onClick={handleItemDelete}
+                            >
+                              <MDTypography variant="h6" color="error">
+                                나눔 삭제
+                              </MDTypography>
+                            </MDButton>
+                          </MDBox>
+                        </>
+                      ) : (
+                        <>
+                          <MDBox mb={1}>
+                            <MDButton
+                              variant="outlined"
+                              color="info"
+                              fullWidth
+                              onClick={handleItemApply}
+                            >
+                              <MDTypography variant="h6" color="info">
+                                나눔받기 신청
+                              </MDTypography>
+                            </MDButton>
+                          </MDBox>
+                          <MDBox>
+                            <MDButton
+                              variant="outlined"
+                              color="secondary"
+                              fullWidth
+                              onClick={handleAddWish}
+                            >
+                              <MDTypography variant="h6" color="secondary">
+                                위시리스트 추가
+                              </MDTypography>
+                            </MDButton>
+                          </MDBox>
+                        </>
+                      )}
+                    </Grid>
                   </Grid>
                 </MDBox>
               </MDBox>
