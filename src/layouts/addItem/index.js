@@ -9,7 +9,7 @@ import MDButton from "../../components/MDButton";
 import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axiosInstance from "../../apis/axios";
-import { Image } from "antd";
+import { Carousel, Image } from "antd";
 
 function AddItem() {
   const navigate = useNavigate();
@@ -199,7 +199,7 @@ function AddItem() {
                         color="info"
                         fullWidth
                         onClick={handleSubmit}
-                        sx={{ width: "20%" }}
+                        sx={{ width: "20%", whiteSpace: "nowrap" }}
                       >
                         나눔 등록
                       </MDButton>
