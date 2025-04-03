@@ -163,9 +163,10 @@ export default function App() {
           <>
             {getRoutes(routes)}
             <Route path="*" element={<Navigate to="/home" />} />
-            <Route path="/item/:itemId" element={<ItemDetail />} />
+            <Route path="/home/:itemId" element={<ItemDetail />} />
             <Route path="/addItem" element={<AddItem />} />
             <Route path="/share-history" element={<ShareHistory />} />
+            <Route path="/share-history/:itemId" element={<ItemDetail />} />
           </>
         ) : (
           <>

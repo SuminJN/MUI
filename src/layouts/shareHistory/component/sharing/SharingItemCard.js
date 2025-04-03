@@ -8,41 +8,31 @@ import Grid from "@mui/material/Grid";
 import { Image } from "antd";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
-import { ListItemButton } from "@mui/material";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
-import Divider from "@mui/material/Divider";
 import { useState } from "react";
 import Drawer from "@mui/material/Drawer";
-
-function InboxIcon() {
-  return null;
-}
+import { Link } from "react-router-dom";
+import axiosInstance from "../../../../apis/axios";
+import IconButton from "@mui/material/IconButton";
+import ListItemText from "@mui/material/ListItemText";
+import Divider from "@mui/material/Divider";
 
 function SharingItemCard({ itemId, image, title, createdTime, category, description }) {
   const [controller] = useMaterialUIController();
   const { darkMode } = controller;
   const [isOpen, setIsOpen] = useState(false);
-  const [state, setState] = useState({
-    top: false,
-    left: false,
-    bottom: false,
-    right: false,
-  });
+  const [applicantList, setApplicantList] = useState([]);
 
-  const toggleDrawer = (open) => (event) => {
-    if (event.type === "keydown" && (event.key === "Tab" || event.key === "Shift")) {
-      return;
-    }
-
-    setIsOpen(open);
+  const getApplicant = (itemId) => {
+    setIsOpen(true);
+    axiosInstance.get(`/api/history/${itemId}`).then((res) => {
+      setApplicantList(res.data);
+    });
+    console.log(applicantList);
   };
 
-  const list = () => (
-    <MDBox role="presentation" onClick={toggleDrawer(false)} onKeyDown={toggleDrawer(false)}>
-      <Divider />
-    </MDBox>
-  );
+  const onClose = () => {
+    setIsOpen(false);
+  };
 
   return (
     <MDBox
@@ -59,7 +49,7 @@ function SharingItemCard({ itemId, image, title, createdTime, category, descript
         <Grid item xs={12} sm={3}>
           <Image
             width="100%"
-            height="150px"
+            height="200px"
             src={image}
             style={{ borderRadius: "8px" }}
             alt="image"
@@ -74,7 +64,7 @@ function SharingItemCard({ itemId, image, title, createdTime, category, descript
               flexDirection={{ xs: "column", sm: "row" }}
               mb={2}
             >
-              <MDTypography variant="button" fontWeight="medium" textTransform="capitalize">
+              <MDTypography variant="h5" fontWeight="bold" textTransform="capitalize">
                 {title}
               </MDTypography>
 
@@ -85,19 +75,68 @@ function SharingItemCard({ itemId, image, title, createdTime, category, descript
                 ml={{ xs: -1.5, sm: 0 }}
               >
                 <MDBox mr={1}>
-                  <MDButton variant="text" color="info">
-                    <Icon>edit</Icon>&nbsp;자세히 보기
+                  <MDButton
+                    variant="text"
+                    color={darkMode ? "white" : "dark"}
+                    onClick={() => getApplicant(itemId)}
+                  >
+                    <Icon>group</Icon>&nbsp;신청자 보기
                   </MDButton>
                 </MDBox>
                 <MDButton
+                  component={Link}
+                  to={`/share-history/${itemId}`}
                   variant="text"
-                  color={darkMode ? "white" : "dark"}
-                  onClick={toggleDrawer(true)}
+                  color="info"
                 >
-                  <Icon>group</Icon>&nbsp;신청자 보기
+                  <Icon>edit</Icon>&nbsp;자세히 보기
                 </MDButton>
-                <Drawer anchor="right" open={isOpen} onClose={toggleDrawer(false)}>
-                  {list()}
+                <Drawer
+                  anchor="right"
+                  open={isOpen}
+                  onClose={onClose}
+                  PaperProps={{ sx: { width: 300 } }}
+                >
+                  <MDBox m={3}>
+                    <List>
+                      {applicantList.map((applicant, index) => (
+                        <ListItem key={index} disablePadding>
+                          <ListItemText
+                            primary={
+                              <MDBox
+                                mb={1}
+                                display="flex"
+                                alignItems="center"
+                                justifyContent="space-between"
+                              >
+                                <MDTypography variant="caption" fontWeight="bold" color="text">
+                                  {applicant.nickName}
+                                </MDTypography>
+                                <MDBox display="flex" alignItems="center">
+                                  <MDTypography
+                                    variant="caption"
+                                    fontWeight="regular"
+                                    color="text"
+                                    mr={1}
+                                  >
+                                    {applicant.applicationTime}
+                                  </MDTypography>
+                                  <MDButton
+                                    variant="text"
+                                    color="info"
+                                    aria-label="comment"
+                                    size="small"
+                                  >
+                                    채팅하기
+                                  </MDButton>
+                                </MDBox>
+                              </MDBox>
+                            }
+                          />
+                        </ListItem>
+                      ))}
+                    </List>
+                  </MDBox>
                 </Drawer>
               </MDBox>
             </MDBox>

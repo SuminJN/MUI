@@ -53,6 +53,7 @@ function ItemDetail() {
   };
 
   useEffect(() => {
+    console.log(itemId);
     axiosInstance.get(`/api/item/${itemId}`).then((res) => {
       setItem(res.data);
       console.log(res.data);

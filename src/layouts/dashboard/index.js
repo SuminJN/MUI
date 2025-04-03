@@ -77,7 +77,7 @@ function Dashboard() {
                     description={item.description}
                     action={{
                       type: "internal",
-                      route: `/item/${item.itemId}`,
+                      route: `/home/${item.itemId}`,
                       color: "info",
                       label: "자세히 보기",
                     }}

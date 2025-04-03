@@ -33,7 +33,7 @@ function SharingInformation() {
 
   return (
     <Grid container spacing={3}>
-      <Grid item xs={12} sm={8}>
+      <Grid item xs={12} sm={12}>
         <Card>
           <MDBox pt={3} px={2}>
             <MDTypography variant="h6" fontWeight="medium">
