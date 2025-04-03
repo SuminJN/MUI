@@ -44,6 +44,7 @@ import LoginIng from "./services/LoginIng";
 import ItemDetail from "./layouts/itemDetail";
 import AddItem from "./layouts/addItem";
 import SignUp from "./layouts/authentication/sign-up";
+import ShareHistory from "./layouts/shareHistory";
 
 export default function App() {
   const [controller, dispatch] = useMaterialUIController();
@@ -164,6 +165,7 @@ export default function App() {
             <Route path="*" element={<Navigate to="/home" />} />
             <Route path="/item/:itemId" element={<ItemDetail />} />
             <Route path="/addItem" element={<AddItem />} />
+            <Route path="/share-history" element={<ShareHistory />} />
           </>
         ) : (
           <>

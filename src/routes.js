@@ -9,6 +9,7 @@ import SignUp from "layouts/authentication/sign-up";
 
 // @mui icons
 import Icon from "@mui/material/Icon";
+import ShareHistory from "./layouts/shareHistory";
 
 const routes = [
   {
@@ -18,6 +19,14 @@ const routes = [
     icon: <Icon fontSize="small">dashboard</Icon>,
     route: "/home",
     component: <Dashboard />,
+  },
+  {
+    type: "collapse",
+    name: "Share History",
+    key: "share-history",
+    icon: <Icon fontSize="small">account_balance_icon</Icon>,
+    route: "/share-history",
+    component: <ShareHistory />,
   },
   {
     type: "collapse",
