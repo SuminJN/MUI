@@ -114,18 +114,16 @@ function AddItem() {
                 </MDTypography>
               </MDBox>
               <Grid container spacing={3} justifyContent="center">
-                <Grid container spacing={3} justifyContent="center">
-                  {previews.map((src, index) => (
-                    <Grid item xs={12} sm={3} key={index} mt={3}>
-                      <Image
-                        width="100%"
-                        height="150px"
-                        src={src}
-                        style={{ borderRadius: "8px", boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)" }}
-                      />
-                    </Grid>
-                  ))}
-                </Grid>
+                {previews.map((src, index) => (
+                  <Grid item mx={3} xs={12} sm={3} key={index} mt={3}>
+                    <Image
+                      width="100%"
+                      height="150px"
+                      src={src}
+                      style={{ borderRadius: "8px", boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)" }}
+                    />
+                  </Grid>
+                ))}
                 <Grid item xs={12}>
                   <MDBox mx={3} display="flex" justifyContent="flex-end">
                     <input
