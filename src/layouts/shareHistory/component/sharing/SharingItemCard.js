@@ -12,9 +12,7 @@ import { useState } from "react";
 import Drawer from "@mui/material/Drawer";
 import { Link } from "react-router-dom";
 import axiosInstance from "../../../../apis/axios";
-import IconButton from "@mui/material/IconButton";
 import ListItemText from "@mui/material/ListItemText";
-import Divider from "@mui/material/Divider";
 
 function SharingItemCard({ itemId, image, title, createdTime, category, description }) {
   const [controller] = useMaterialUIController();

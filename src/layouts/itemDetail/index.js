@@ -7,8 +7,6 @@ import { useEffect, useState } from "react";
 import axiosInstance from "../../apis/axios";
 import { useNavigate, useParams } from "react-router-dom";
 import MDTypography from "../../components/MDTypography";
-import { CardContent, ImageList, ImageListItem } from "@mui/material";
-import Divider from "@mui/material/Divider";
 import MDButton from "../../components/MDButton";
 import { Image } from "antd";
 

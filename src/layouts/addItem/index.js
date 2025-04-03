@@ -6,10 +6,10 @@ import Card from "@mui/material/Card";
 import MDTypography from "../../components/MDTypography";
 import TextField from "@mui/material/TextField";
 import MDButton from "../../components/MDButton";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axiosInstance from "../../apis/axios";
-import { Carousel, Image } from "antd";
+import { Image } from "antd";
 import Footer from "../../examples/Footer";
 
 function AddItem() {
