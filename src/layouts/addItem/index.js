@@ -10,6 +10,7 @@ import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axiosInstance from "../../apis/axios";
 import { Carousel, Image } from "antd";
+import Footer from "../../examples/Footer";
 
 function AddItem() {
   const navigate = useNavigate();
@@ -94,7 +95,7 @@ function AddItem() {
   return (
     <DashboardLayout>
       <DashboardNavbar />
-      <MDBox mt={3}>
+      <MDBox my={3}>
         <Grid container spacing={3} justifyContent="center">
           <Grid item xs={12} sm={10} md={8} lg={6}>
             <Card>
@@ -209,6 +210,7 @@ function AddItem() {
           </Grid>
         </Grid>
       </MDBox>
+      <Footer />
     </DashboardLayout>
   );
 }
