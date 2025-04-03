@@ -63,8 +63,25 @@ function ItemDetail() {
     <DashboardLayout>
       <DashboardNavbar />
       <MDBox mt={2} mb={3}>
+        <MDBox>
+          <Grid container spacing={2} justifyContent="center">
+            {item &&
+              item.images.map((image, index) => (
+                <Grid item key={index} xs={12} sm={4}>
+                  <img
+                    src={image}
+                    alt="image"
+                    loading="lazy"
+                    width="100%"
+                    height="300px"
+                    style={{ borderRadius: "8px", boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)" }}
+                  />
+                </Grid>
+              ))}
+          </Grid>
+        </MDBox>
         <Grid container spacing={3} mb={2} justifyContent="center">
-          <Grid item xs={12} sm={8}>
+          <Grid item xs={12}>
             <Card>
               <MDBox p={2}>
                 <MDBox p={3}>
@@ -157,23 +174,6 @@ function ItemDetail() {
                 </MDBox>
               </MDBox>
             </Card>
-          </Grid>
-          <Grid item xs={12} sm={4}>
-            <Grid container spacing={2}>
-              {item &&
-                item.images.map((image, index) => (
-                  <Grid item key={index}>
-                    <img
-                      src={image}
-                      alt="image"
-                      loading="lazy"
-                      width="100%"
-                      height="300px"
-                      style={{ borderRadius: "8px", boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)" }}
-                    />
-                  </Grid>
-                ))}
-            </Grid>
           </Grid>
         </Grid>
       </MDBox>
