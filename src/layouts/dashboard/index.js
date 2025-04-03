@@ -60,13 +60,13 @@ function Dashboard() {
         {/*<MDBox pr={1}>*/}
         {/*  <MDInput label="검색어를 입력해주세요" />*/}
         {/*</MDBox>*/}
-        <MDButton component={Link} to="/addItem" variant="gradient" color="secondary">
+        <MDButton component={Link} to="/addItem" variant="gradient" color="info">
           <Icon sx={{ fontWeight: "bold" }}>add</Icon>
           &nbsp;나눔하기
         </MDButton>
       </MDBox>
       <MDBox py={2}>
-        <Grid container spacing={3}>
+        <Grid container spacing={2}>
           {itemList !== null
             ? itemList.map((item, index) => (
                 <Grid key={index} item xs={12} md={6} xl={3}>
