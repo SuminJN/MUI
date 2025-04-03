@@ -9,6 +9,7 @@ import Icon from "@mui/material/Icon";
 import { useState } from "react";
 import SharingInformation from "./component/sharing/SharingInformation";
 import Footer from "../../examples/Footer";
+import ShareDoneInformation from "./component/shareDone/ShareDoneInformation";
 
 function ShareHistory() {
   const [tabsOrientation, setTabsOrientation] = useState("horizontal");
@@ -26,7 +27,7 @@ function ShareHistory() {
             <AppBar position="static">
               <Tabs orientation={tabsOrientation} value={tabValue} onChange={handleSetTabValue}>
                 <Tab
-                  label="나눔 중인 물건"
+                  label="나눔 중"
                   icon={
                     <Icon fontSize="small" sx={{ mt: -0.25 }}>
                       volunteer_activism
@@ -46,7 +47,7 @@ function ShareHistory() {
           </Grid>
         </Grid>
       </MDBox>
-      <MDBox my={3}>{tabValue === 0 ? <SharingInformation /> : null}</MDBox>
+      <MDBox my={3}>{tabValue === 0 ? <SharingInformation /> : <ShareDoneInformation />}</MDBox>
       <Footer />
     </DashboardLayout>
   );
