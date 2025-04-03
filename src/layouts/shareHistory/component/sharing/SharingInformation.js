@@ -4,26 +4,10 @@ import MDTypography from "../../../../components/MDTypography";
 import SharingItemCard from "./SharingItemCard";
 import axiosInstance from "../../../../apis/axios";
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import Grid from "@mui/material/Grid";
 
 function SharingInformation() {
-  const navigate = useNavigate();
   const [itemList, setItemList] = useState(null);
-  const [open, setOpen] = useState(false);
-  const [applicantList, setApplicantList] = useState([]);
-
-  const getApplicant = (itemId) => {
-    setOpen(true);
-    axiosInstance.get(`/api/history/${itemId}`).then((res) => {
-      setApplicantList(res.data);
-    });
-    console.log(applicantList);
-  };
-
-  const onClose = () => {
-    setOpen(false);
-  };
 
   useEffect(() => {
     axiosInstance.get("/api/items/shared", { params: { done: false } }).then((res) => {
