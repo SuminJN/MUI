@@ -55,8 +55,6 @@ function Sidenav({ color, brand, brandName, routes, ...rest }) {
   const { miniSidenav, transparentSidenav, whiteSidenav, darkMode, sidenavColor } = controller;
   const location = useLocation();
   const collapseName = location.pathname.replace("/", "");
-  const navigate = useNavigate();
-  const [isLoggedIn, setIsLoggedIn] = useRecoilState(LoginState);
 
   let textColor = "white";
 
@@ -145,16 +143,6 @@ function Sidenav({ color, brand, brandName, routes, ...rest }) {
     return returnValue;
   });
 
-  const handleLogout = async () => {
-    localStorage.clear();
-    setIsLoggedIn(false);
-
-    await axiosInstance.get("/api/nanuri/auth/logout");
-
-    navigate("/");
-    window.location.reload();
-  };
-
   return (
     <SidenavRoot
       {...rest}
@@ -194,19 +182,6 @@ function Sidenav({ color, brand, brandName, routes, ...rest }) {
         }
       />
       <List>{renderRoutes}</List>
-      <MDBox p={2} mt="auto">
-        <MDButton
-          component="a"
-          target="_blank"
-          rel="noreferrer"
-          variant="gradient"
-          color={sidenavColor}
-          fullWidth
-          onClick={handleLogout}
-        >
-          Log out
-        </MDButton>
-      </MDBox>
     </SidenavRoot>
   );
 }

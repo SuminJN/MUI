@@ -47,7 +47,9 @@ function ShareHistory() {
           </Grid>
         </Grid>
       </MDBox>
-      <MDBox my={3}>{tabValue === 0 ? <SharingInformation /> : <ShareDoneInformation />}</MDBox>
+      <MDBox mt={2} mb={3}>
+        {tabValue === 0 ? <SharingInformation /> : <ShareDoneInformation />}
+      </MDBox>
       <Footer />
     </DashboardLayout>
   );

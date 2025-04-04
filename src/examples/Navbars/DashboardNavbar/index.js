@@ -16,7 +16,7 @@ Coded by www.creative-tim.com
 import { useState, useEffect } from "react";
 
 // react-router components
-import { useLocation, Link } from "react-router-dom";
+import { useLocation, Link, useNavigate } from "react-router-dom";
 
 // prop-types is a library for typechecking of props.
 import PropTypes from "prop-types";
@@ -52,6 +52,9 @@ import {
   setMiniSidenav,
   setOpenConfigurator,
 } from "context";
+import axiosInstance from "../../../apis/axios";
+import { useRecoilState } from "recoil";
+import { LoginState } from "../../../recoil/LoginState";
 
 function DashboardNavbar({ absolute, light, isMini }) {
   const [navbarType, setNavbarType] = useState();
@@ -59,6 +62,16 @@ function DashboardNavbar({ absolute, light, isMini }) {
   const { miniSidenav, transparentNavbar, fixedNavbar, openConfigurator, darkMode } = controller;
   const [openMenu, setOpenMenu] = useState(false);
   const route = useLocation().pathname.split("/").slice(1);
+  const navigate = useNavigate();
+  const [isLoggedIn, setIsLoggedIn] = useRecoilState(LoginState);
+
+  const handleLogout = async () => {
+    setIsLoggedIn(false);
+
+    await axiosInstance.get("/api/nanuri/auth/logout");
+
+    navigate("/");
+  };
 
   useEffect(() => {
     // Setting the navbar type
@@ -73,8 +86,8 @@ function DashboardNavbar({ absolute, light, isMini }) {
       setTransparentNavbar(dispatch, (fixedNavbar && window.scrollY === 0) || !fixedNavbar);
     }
 
-    /** 
-     The event listener that's calling the handleTransparentNavbar function when 
+    /**
+     The event listener that's calling the handleTransparentNavbar function when
      scrolling the window.
     */
     window.addEventListener("scroll", handleTransparentNavbar);
@@ -173,6 +186,18 @@ function DashboardNavbar({ absolute, light, isMini }) {
                   <Icon sx={iconsStyle}>account_circle</Icon>
                 </IconButton>
               </Link>
+              <IconButton
+                size="small"
+                disableRipple
+                color="inherit"
+                sx={navbarIconButton}
+                aria-controls="notification-menu"
+                aria-haspopup="true"
+                variant="contained"
+                onClick={handleLogout}
+              >
+                <Icon sx={iconsStyle}>logout_icon</Icon>
+              </IconButton>
               {renderMenu()}
             </MDBox>
           </MDBox>
