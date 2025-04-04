@@ -8,8 +8,8 @@ import Tab from "@mui/material/Tab";
 import Icon from "@mui/material/Icon";
 import { useState } from "react";
 import Footer from "../../examples/Footer";
-import ReceiveDoneInformation from "./component/receiveDone/ReceiveDoneInformation";
-import ReceivingInformation from "./component/receiving/ReceivingInformation";
+import ReceiveDoneInformation from "./component/ReceiveDoneInformation";
+import ReceivingInformation from "./component/ReceivingInformation";
 
 function ShareRequest() {
   const [tabsOrientation, setTabsOrientation] = useState("horizontal");

@@ -7,9 +7,9 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Icon from "@mui/material/Icon";
 import { useState } from "react";
-import SharingInformation from "./component/sharing/SharingInformation";
+import SharingInformation from "./component/SharingInformation";
 import Footer from "../../examples/Footer";
-import ShareDoneInformation from "./component/shareDone/ShareDoneInformation";
+import ShareDoneInformation from "./component/ShareDoneInformation";
 
 function ShareHistory() {
   const [tabsOrientation, setTabsOrientation] = useState("horizontal");

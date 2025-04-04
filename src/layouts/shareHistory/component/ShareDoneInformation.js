@@ -1,10 +1,10 @@
 import Card from "@mui/material/Card";
-import MDBox from "../../../../components/MDBox";
-import MDTypography from "../../../../components/MDTypography";
-import axiosInstance from "../../../../apis/axios";
+import MDBox from "../../../components/MDBox";
+import MDTypography from "../../../components/MDTypography";
+import axiosInstance from "../../../apis/axios";
 import { useEffect, useState } from "react";
 import Grid from "@mui/material/Grid";
-import ShareDoneItemCard from "./ShareDoneItemCard";
+import ItemCard from "../../../components/ItemCard";
 
 function ShareDoneInformation() {
   const [itemList, setItemList] = useState(null);
@@ -25,22 +25,23 @@ function ShareDoneInformation() {
             </MDTypography>
           </MDBox>
           <MDBox pt={1} pb={2} px={2}>
-            <MDBox component="ul" display="flex" flexDirection="column" p={0} m={0}>
+            <Grid container spacing={2}>
               {itemList === null
                 ? null
                 : itemList.map((item, idx) => (
-                    <ShareDoneItemCard
-                      key={idx}
-                      itemId={item.itemId}
-                      title={item.title}
-                      description={item.description}
-                      category={item.category}
-                      image={item.image}
-                      createdTime={item.createdTime}
-                      updatedTime={item.updatedTime}
-                    />
+                    <Grid item xs={12} sm={6} md={6} lg={4} xl={3} key={idx}>
+                      <ItemCard
+                        itemId={item.itemId}
+                        title={item.title}
+                        description={item.description}
+                        category={item.category}
+                        image={item.image}
+                        createdTime={item.createdTime}
+                        route={`/share-history/${item.itemId}`}
+                      />
+                    </Grid>
                   ))}
-            </MDBox>
+            </Grid>
           </MDBox>
         </Card>
       </Grid>

@@ -1,16 +1,16 @@
 import Card from "@mui/material/Card";
-import MDBox from "../../../../components/MDBox";
-import MDTypography from "../../../../components/MDTypography";
-import axiosInstance from "../../../../apis/axios";
+import MDBox from "../../../components/MDBox";
+import MDTypography from "../../../components/MDTypography";
+import axiosInstance from "../../../apis/axios";
 import { useEffect, useState } from "react";
 import Grid from "@mui/material/Grid";
-import ItemCard from "../../../../components/ItemCard";
+import ItemCard from "../../../components/ItemCard";
 
-function SharingInformation() {
+function ReceiveDoneInformation() {
   const [itemList, setItemList] = useState(null);
 
   useEffect(() => {
-    axiosInstance.get("/api/items/shared", { params: { done: false } }).then((res) => {
+    axiosInstance.get("/api/history/receive-done").then((res) => {
       setItemList(res.data);
     });
   }, []);
@@ -21,7 +21,7 @@ function SharingInformation() {
         <Card>
           <MDBox pt={3} px={2}>
             <MDTypography variant="h6" fontWeight="medium">
-              나눔 중인 물건
+              받은 물건
             </MDTypography>
           </MDBox>
           <MDBox pt={1} pb={2} px={2}>
@@ -49,4 +49,4 @@ function SharingInformation() {
   );
 }
 
-export default SharingInformation;
+export default ReceiveDoneInformation;
