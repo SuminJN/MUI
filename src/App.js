@@ -1,7 +1,7 @@
 import { useState, useEffect, useMemo } from "react";
 
 // react-router components
-import { Routes, Route, Navigate, useLocation } from "react-router-dom";
+import { Routes, Route, Navigate, useLocation, Link, useNavigate } from "react-router-dom";
 
 // @mui material components
 import { ThemeProvider } from "@mui/material/styles";
@@ -45,6 +45,8 @@ import ItemDetail from "./layouts/itemDetail";
 import AddItem from "./layouts/addItem";
 import SignUp from "./layouts/authentication/sign-up";
 import ShareHistory from "./layouts/shareHistory";
+import { CommentOutlined, CustomerServiceOutlined } from "@ant-design/icons";
+import { FloatButton } from "antd";
 
 export default function App() {
   const [controller, dispatch] = useMaterialUIController();
@@ -62,6 +64,7 @@ export default function App() {
   const [rtlCache, setRtlCache] = useState(null);
   const { pathname } = useLocation();
   const loginState = useRecoilValue(LoginState);
+  const navigate = useNavigate();
 
   // Cache for the rtl
   useMemo(() => {
@@ -118,26 +121,48 @@ export default function App() {
 
   const configsButton = (
     <MDBox
+      component={Link}
+      to="/addItem"
       display="flex"
       justifyContent="center"
       alignItems="center"
       width="3.25rem"
       height="3.25rem"
-      bgColor="white"
+      bgColor="info"
       shadow="sm"
       borderRadius="50%"
       position="fixed"
       right="2rem"
       bottom="2rem"
       zIndex={99}
-      color="dark"
+      color="white"
       sx={{ cursor: "pointer" }}
-      onClick={handleConfiguratorOpen}
     >
-      <Icon fontSize="small" color="inherit">
-        settings
-      </Icon>
+      <Icon sx={{ fontWeight: "bold" }}>add</Icon>
     </MDBox>
+  );
+
+  const floatingButton = () => (
+    <>
+      <FloatButton.Group
+        trigger="click"
+        type="primary"
+        style={{ insetInlineEnd: 24 }}
+        icon={<CustomerServiceOutlined />}
+      >
+        <FloatButton />
+        <FloatButton icon={<CommentOutlined />} />
+      </FloatButton.Group>
+      <FloatButton.Group
+        trigger="hover"
+        type="primary"
+        style={{ insetInlineEnd: 94 }}
+        icon={<CustomerServiceOutlined />}
+      >
+        <FloatButton />
+        <FloatButton icon={<CommentOutlined />} />
+      </FloatButton.Group>
+    </>
   );
 
   return (
@@ -154,7 +179,21 @@ export default function App() {
             onMouseLeave={handleOnMouseLeave}
           />
           <Configurator />
-          {configsButton}
+          {/*{configsButton}*/}
+          <FloatButton.Group
+            trigger="hover"
+            type="primary"
+            style={{ insetInlineEnd: 24 }}
+            icon={<Icon sx={{ fontWeight: "bold" }}>add</Icon>}
+          >
+            <FloatButton
+              description={<strong>나눔 하기</strong>}
+              onClick={() => {
+                navigate("/addItem");
+              }}
+            />
+            <FloatButton description={<strong>나눔 받기</strong>} />
+          </FloatButton.Group>
         </>
       )}
       {/*{layout === "vr" && <Configurator />}*/}
