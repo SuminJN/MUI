@@ -40,11 +40,12 @@ function SharingItemCard({ itemId, image, title, createdTime, category, descript
       alignItems="flex-start"
       bgColor={darkMode ? "transparent" : "grey-100"}
       borderRadius="lg"
+      shadow="sm"
       p={2}
-      mb={2}
+      mb={1}
     >
-      <Grid container spacing={2}>
-        <Grid item xs={12} sm={3}>
+      <Grid container spacing={1}>
+        <Grid item xs={12}>
           <Image
             width="100%"
             height="200px"
@@ -53,90 +54,12 @@ function SharingItemCard({ itemId, image, title, createdTime, category, descript
             alt="image"
           />
         </Grid>
-        <Grid item xs={12} sm={9}>
+        <Grid item xs={12} style={{ height: "200px" }}>
           <MDBox width="100%" display="flex" flexDirection="column">
-            <MDBox
-              display="flex"
-              justifyContent="space-between"
-              alignItems={{ xs: "flex-start", sm: "center" }}
-              flexDirection={{ xs: "column", sm: "row" }}
-              mb={2}
-            >
+            <MDBox mb={2}>
               <MDTypography variant="h5" fontWeight="bold" textTransform="capitalize">
                 {title}
               </MDTypography>
-
-              <MDBox
-                display="flex"
-                alignItems="center"
-                mt={{ xs: 2, sm: 0 }}
-                ml={{ xs: -1.5, sm: 0 }}
-              >
-                <MDBox mr={1}>
-                  <MDButton
-                    variant="text"
-                    color={darkMode ? "white" : "dark"}
-                    onClick={() => getApplicant(itemId)}
-                  >
-                    <Icon>group</Icon>&nbsp;신청자 보기
-                  </MDButton>
-                </MDBox>
-                <MDButton
-                  component={Link}
-                  to={`/share-history/${itemId}`}
-                  variant="text"
-                  color="info"
-                >
-                  <Icon>edit</Icon>&nbsp;자세히 보기
-                </MDButton>
-                <Drawer
-                  anchor="right"
-                  open={isOpen}
-                  onClose={onClose}
-                  PaperProps={{ sx: { width: 300 } }}
-                >
-                  <MDBox m={3}>
-                    <List>
-                      {applicantList.map((applicant, index) => (
-                        <ListItem key={index} disablePadding>
-                          <ListItemText
-                            primary={
-                              <MDBox
-                                mb={1}
-                                display="flex"
-                                alignItems="center"
-                                justifyContent="space-between"
-                              >
-                                <MDTypography variant="caption" fontWeight="bold" color="text">
-                                  {applicant.nickName}
-                                </MDTypography>
-                                <MDBox display="flex" alignItems="center">
-                                  <MDTypography
-                                    variant="caption"
-                                    fontWeight="regular"
-                                    color="text"
-                                    mr={1}
-                                  >
-                                    {applicant.applicationTime}
-                                  </MDTypography>
-                                  <MDButton
-                                    variant="text"
-                                    color="info"
-                                    aria-label="comment"
-                                    size="small"
-                                  >
-                                    채팅하기
-                                  </MDButton>
-                                </MDBox>
-                              </MDBox>
-                            }
-                          />
-                        </ListItem>
-                      ))}
-                    </List>
-                  </MDBox>
-                </Drawer>
-              </MDBox>
             </MDBox>
             <MDBox mb={1} lineHeight={0}>
               <MDTypography variant="caption" fontWeight="regular" color="text">
@@ -161,6 +84,25 @@ function SharingItemCard({ itemId, image, title, createdTime, category, descript
               </MDTypography>
             </MDTypography>
           </MDBox>
+        </Grid>
+        <Grid
+          item
+          xs={12}
+          display="flex"
+          justifyContent="flex-end"
+          alignItems="flex-end"
+          style={{ marginTop: "auto" }}
+        >
+          <MDButton
+            variant="text"
+            color={darkMode ? "white" : "dark"}
+            onClick={() => getApplicant(itemId)}
+          >
+            <Icon>group</Icon>&nbsp;신청자 보기
+          </MDButton>
+          <MDButton component={Link} to={`/share-history/${itemId}`} variant="text" color="info">
+            <Icon>edit</Icon>&nbsp;자세히 보기
+          </MDButton>
         </Grid>
       </Grid>
     </MDBox>

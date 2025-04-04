@@ -25,21 +25,22 @@ function SharingInformation() {
             </MDTypography>
           </MDBox>
           <MDBox pt={1} pb={2} px={2}>
-            <MDBox component="ul" display="flex" flexDirection="column" p={0} m={0}>
+            <Grid container spacing={2}>
               {itemList === null
                 ? null
                 : itemList.map((item, idx) => (
-                    <SharingItemCard
-                      key={idx}
-                      itemId={item.itemId}
-                      title={item.title}
-                      description={item.description}
-                      category={item.category}
-                      image={item.image}
-                      createdTime={item.createdTime}
-                    />
+                    <Grid item xs={12} sm={6} md={4} lg={3} key={idx}>
+                      <SharingItemCard
+                        itemId={item.itemId}
+                        title={item.title}
+                        description={item.description}
+                        category={item.category}
+                        image={item.image}
+                        createdTime={item.createdTime}
+                      />
+                    </Grid>
                   ))}
-            </MDBox>
+            </Grid>
           </MDBox>
         </Card>
       </Grid>

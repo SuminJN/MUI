@@ -10,7 +10,7 @@ function ReceiveDoneInformation() {
   const [itemList, setItemList] = useState(null);
 
   useEffect(() => {
-    axiosInstance.get("/api/items/shared", { params: { done: true } }).then((res) => {
+    axiosInstance.get("/api/history/receive-done").then((res) => {
       setItemList(res.data);
     });
   }, []);
