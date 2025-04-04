@@ -1,17 +1,17 @@
 /**
-=========================================================
-* Material Dashboard 2 React - v2.2.0
-=========================================================
+ =========================================================
+ * Material Dashboard 2 React - v2.2.0
+ =========================================================
 
-* Product Page: https://www.creative-tim.com/product/material-dashboard-react
-* Copyright 2023 Creative Tim (https://www.creative-tim.com)
+ * Product Page: https://www.creative-tim.com/product/material-dashboard-react
+ * Copyright 2023 Creative Tim (https://www.creative-tim.com)
 
-Coded by www.creative-tim.com
+ Coded by www.creative-tim.com
 
  =========================================================
 
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ */
 
 // @mui material components
 import Grid from "@mui/material/Grid";
@@ -51,13 +51,33 @@ import team2 from "assets/images/team-2.jpg";
 import team3 from "assets/images/team-3.jpg";
 import team4 from "assets/images/team-4.jpg";
 import DefaultItemCard from "../../examples/Cards/ItemCards/DefaultItemCard";
+import { useEffect, useState } from "react";
+import axiosInstance from "../../apis/axios";
 
 function Overview() {
+  const [user, setUser] = useState({
+    uniqueId: "",
+    name: "",
+    department: "",
+    nickname: "",
+  });
+
+  const getUser = async () => {
+    const response = await axiosInstance.get("/api/user");
+    setUser(response.data);
+  };
+
+  useEffect(() => {
+    axiosInstance.get("/api/user").then((response) => {
+      setUser(response.data);
+    });
+  }, []);
+
   return (
     <DashboardLayout>
       <DashboardNavbar />
       <MDBox mb={2} />
-      <Header>
+      <Header nickname={user.nickname}>
         <MDBox mt={5} mb={3}>
           <Grid container spacing={1}>
             <Grid item xs={12} md={6} xl={4}>
@@ -69,28 +89,11 @@ function Overview() {
                 title="profile information"
                 description="Hi, I’m Alec Thompson, Decisions: If you can’t decide, the answer is no. If two equally difficult paths, choose the one more painful in the short term (pain avoidance is creating an illusion of equality)."
                 info={{
-                  fullName: "Alec M. Thompson",
-                  mobile: "(44) 123 1234 123",
-                  email: "alecthompson@mail.com",
-                  location: "USA",
+                  id: user.uniqueId,
+                  fullName: user.name,
+                  nickname: user.nickname,
+                  department: user.department,
                 }}
-                social={[
-                  {
-                    link: "https://www.facebook.com/CreativeTim/",
-                    icon: <FacebookIcon />,
-                    color: "facebook",
-                  },
-                  {
-                    link: "https://twitter.com/creativetim",
-                    icon: <TwitterIcon />,
-                    color: "twitter",
-                  },
-                  {
-                    link: "https://www.instagram.com/creativetimofficial/",
-                    icon: <InstagramIcon />,
-                    color: "instagram",
-                  },
-                ]}
                 action={{ route: "", tooltip: "Edit Profile" }}
                 shadow={false}
               />
@@ -102,16 +105,16 @@ function Overview() {
           </Grid>
         </MDBox>
 
-        <MDBox pt={2} px={2} lineHeight={1.25}>
-          <MDTypography variant="h6" fontWeight="medium">
-            Projects
-          </MDTypography>
-          <MDBox mb={1}>
-            <MDTypography variant="button" color="text">
-              Architects design houses
-            </MDTypography>
-          </MDBox>
-        </MDBox>
+        {/*<MDBox pt={2} px={2} lineHeight={1.25}>*/}
+        {/*  <MDTypography variant="h6" fontWeight="medium">*/}
+        {/*    Projects*/}
+        {/*  </MDTypography>*/}
+        {/*  <MDBox mb={1}>*/}
+        {/*    <MDTypography variant="button" color="text">*/}
+        {/*      Architects design houses*/}
+        {/*    </MDTypography>*/}
+        {/*  </MDBox>*/}
+        {/*</MDBox>*/}
 
         {/*<MDBox p={2}>*/}
         {/*  <Grid container spacing={6}>*/}
