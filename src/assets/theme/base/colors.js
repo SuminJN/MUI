@@ -1,17 +1,17 @@
 /**
-=========================================================
-* Material Dashboard 2 React - v2.2.0
-=========================================================
+ =========================================================
+ * Material Dashboard 2 React - v2.2.0
+ =========================================================
 
-* Product Page: https://www.creative-tim.com/product/material-dashboard-react
-* Copyright 2023 Creative Tim (https://www.creative-tim.com)
+ * Product Page: https://www.creative-tim.com/product/material-dashboard-react
+ * Copyright 2023 Creative Tim (https://www.creative-tim.com)
 
-Coded by www.creative-tim.com
+ Coded by www.creative-tim.com
 
  =========================================================
 
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ */
 
 /**
  * The base colors for the Material Dashboard 2 React.
@@ -55,8 +55,8 @@ const colors = {
   },
 
   info: {
-    main: "#00a25e",
-    focus: "#00a22e",
+    main: "#007e45",
+    focus: "#007e45",
   },
 
   success: {
@@ -108,8 +108,8 @@ const colors = {
     },
 
     info: {
-      main: "#00a25e",
-      state: "#00a277",
+      main: "#0cb267",
+      state: "#007e45",
     },
 
     success: {
