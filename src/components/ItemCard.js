@@ -6,31 +6,12 @@ import MDButton from "components/MDButton";
 import { useMaterialUIController } from "context";
 import Grid from "@mui/material/Grid";
 import { Image } from "antd";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
 import { useState } from "react";
-import Drawer from "@mui/material/Drawer";
 import { Link } from "react-router-dom";
-import axiosInstance from "../../../../apis/axios";
-import ListItemText from "@mui/material/ListItemText";
 
-function SharingItemCard({ itemId, image, title, createdTime, category, description }) {
+function SharingItemCard({ itemId, image, title, createdTime, category, description, route }) {
   const [controller] = useMaterialUIController();
   const { darkMode } = controller;
-  const [isOpen, setIsOpen] = useState(false);
-  const [applicantList, setApplicantList] = useState([]);
-
-  const getApplicant = (itemId) => {
-    setIsOpen(true);
-    axiosInstance.get(`/api/history/${itemId}`).then((res) => {
-      setApplicantList(res.data);
-    });
-    console.log(applicantList);
-  };
-
-  const onClose = () => {
-    setIsOpen(false);
-  };
 
   return (
     <MDBox
@@ -95,7 +76,7 @@ function SharingItemCard({ itemId, image, title, createdTime, category, descript
         >
           <MDButton
             component={Link}
-            to={`/share-history/${itemId}`}
+            to={route}
             variant="text"
             color="info"
             style={{ whiteSpace: "nowrap" }}
@@ -119,6 +100,7 @@ SharingItemCard.propTypes = {
   category: PropTypes.string.isRequired,
   image: PropTypes.string.isRequired,
   createdTime: PropTypes.string.isRequired,
+  route: PropTypes.string.isRequired,
 };
 
 export default SharingItemCard;
