@@ -10,6 +10,7 @@ import SignUp from "layouts/authentication/sign-up";
 // @mui icons
 import Icon from "@mui/material/Icon";
 import ShareHistory from "./layouts/shareHistory";
+import ShareRequest from "./layouts/shareRequest";
 
 const routes = [
   {
@@ -24,9 +25,17 @@ const routes = [
     type: "collapse",
     name: "Share History",
     key: "share-history",
-    icon: <Icon fontSize="small">account_balance_icon</Icon>,
+    icon: <Icon fontSize="small">volunteer_activism_icon</Icon>,
     route: "/share-history",
     component: <ShareHistory />,
+  },
+  {
+    type: "collapse",
+    name: "Share Request",
+    key: "share-request",
+    icon: <Icon fontSize="small">redeem_icon</Icon>,
+    route: "/share-request",
+    component: <ShareRequest />,
   },
   {
     type: "collapse",
