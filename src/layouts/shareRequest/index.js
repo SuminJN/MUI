@@ -30,7 +30,7 @@ function ShareRequest() {
                   label="대기 중"
                   icon={
                     <Icon fontSize="small" sx={{ mt: -0.25 }}>
-                      hourglass_emptyIcon
+                      hourglass_full_two_tone_icon
                     </Icon>
                   }
                 />
